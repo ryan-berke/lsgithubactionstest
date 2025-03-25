@@ -6,10 +6,10 @@ jobs:
     name: 'LocalStack GitHub Actions Test'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Start LocalStack
-        uses: LocalStack/setup-localstack@v0.2.3
+        uses: LocalStack/setup-localstack@v0.2.4
         with:
           image-tag: 'latest'
           install-awslocal: 'true'
@@ -28,11 +28,11 @@ jobs:
           echo "Test Execution complete!"
 
       - name: Save LocalStack State
-        uses: LocalStack/setup-localstack@v0.2.3
+        uses: LocalStack/setup-localstack@v0.2.4
         with:
           state-backend: local
           state-action: save
           state-name: my-ls-state-artifact
         env:
           LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
-          WORKFLOW_ID: ${{ env.MY_GOLDEN_LS_STATE }}
+          WORKFLOW_ID: ${{ env.TEST_GITHUB_ACTIONS_STATE }}
